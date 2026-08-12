@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dpubrhoajeadw"]
+
+[ext_resource type="Script" uid="uid://ckqpj5ux8b7ga" path="res://scripts/player/movement.gd" id="1_8afob"]
+[ext_resource type="Script" uid="uid://gqyprr25651x" path="res://scripts/player/camera_controller.gd" id="2_dovo2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jsssl"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1350014039]
+script = ExtResource("1_8afob")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1821371382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_jsssl")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1986236927]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5184343, 0)
+current = true
+script = ExtResource("2_dovo2")
+filter = 8
