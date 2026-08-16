@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://6j38i4snarm1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jsssl"]
+size = Vector3(0.5, 0.5, 1)
+
+[node name="Laser" type="Node3D" unique_id=2145241768]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1430068533]
+mesh = SubResource("BoxMesh_jsssl")

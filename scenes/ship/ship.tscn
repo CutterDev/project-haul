@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://dtchkiy8u1roc"]
+
+[ext_resource type="Texture2D" uid="uid://7cac02wb8pfa" path="res://textures/prototypes/Orange/texture_09.png" id="1_ccv4y"]
+[ext_resource type="Script" uid="uid://blv6qf550eu2b" path="res://scripts/ship/ship-system.gd" id="1_iyjb8"]
+[ext_resource type="PackedScene" uid="uid://6j38i4snarm1" path="res://scenes/ship/lasercannon.tscn" id="2_u5c2e"]
+[ext_resource type="Script" uid="uid://dntn4wbca06l6" path="res://scripts/ship/RoomIntegrity.gd" id="2_wxx60"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yujqa"]
+size = Vector3(6, 3, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jsssl"]
+size = Vector3(6, 1, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5c2e"]
+albedo_texture = ExtResource("1_ccv4y")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_jsssl"]
+size = Vector3(6, 1, 6)
+
+[node name="Ship" type="Node3D" unique_id=92293080]
+script = ExtResource("1_iyjb8")
+
+[node name="Laser" parent="." unique_id=2145241768 instance=ExtResource("2_u5c2e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.19, -2.6)
+
+[node name="Laser2" parent="." unique_id=403034141 instance=ExtResource("2_u5c2e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2.6)
+
+[node name="Rooms" type="Node3D" parent="." unique_id=1087965910]
+
+[node name="Bridge" type="Area3D" parent="Rooms" unique_id=1710721081]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("2_wxx60")
+room_name = "Bridge"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Bridge" unique_id=1645020606]
+shape = SubResource("BoxShape3D_yujqa")
+
+[node name="Floor3" type="StaticBody3D" parent="Rooms/Bridge" unique_id=326979205]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Bridge/Floor3" unique_id=1768423705]
+shape = SubResource("BoxShape3D_jsssl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rooms/Bridge/Floor3" unique_id=1539817365]
+material_override = SubResource("StandardMaterial3D_u5c2e")
+mesh = SubResource("BoxMesh_jsssl")
+
+[node name="Shields" type="Area3D" parent="Rooms" unique_id=1815324729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, -6)
+script = ExtResource("2_wxx60")
+room_name = "Shields"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Shields" unique_id=1449278769]
+shape = SubResource("BoxShape3D_yujqa")
+
+[node name="Floor4" type="StaticBody3D" parent="Rooms/Shields" unique_id=1368657845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Shields/Floor4" unique_id=686756172]
+shape = SubResource("BoxShape3D_jsssl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rooms/Shields/Floor4" unique_id=504975616]
+material_override = SubResource("StandardMaterial3D_u5c2e")
+mesh = SubResource("BoxMesh_jsssl")
+
+[node name="Weapons" type="Area3D" parent="Rooms" unique_id=799264201]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -6)
+script = ExtResource("2_wxx60")
+room_name = "Weapons"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Weapons" unique_id=1997862210]
+shape = SubResource("BoxShape3D_yujqa")
+
+[node name="Floor2" type="StaticBody3D" parent="Rooms/Weapons" unique_id=1774565678]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Weapons/Floor2" unique_id=1544233284]
+shape = SubResource("BoxShape3D_jsssl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rooms/Weapons/Floor2" unique_id=1463875157]
+material_override = SubResource("StandardMaterial3D_u5c2e")
+mesh = SubResource("BoxMesh_jsssl")
+
+[node name="Engine" type="Area3D" parent="Rooms" unique_id=1757505177]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -6)
+script = ExtResource("2_wxx60")
+room_name = "Engine"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Engine" unique_id=631548529]
+shape = SubResource("BoxShape3D_yujqa")
+
+[node name="Floor" type="StaticBody3D" parent="Rooms/Engine" unique_id=1592481664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Engine/Floor" unique_id=64547035]
+shape = SubResource("BoxShape3D_jsssl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rooms/Engine/Floor" unique_id=742010655]
+material_override = SubResource("StandardMaterial3D_u5c2e")
+mesh = SubResource("BoxMesh_jsssl")

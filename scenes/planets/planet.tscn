@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dto8n7k5oim7k"]
+
+[ext_resource type="Script" uid="uid://btwcx2i6qp0c8" path="res://scripts/system/Planet.gd" id="1_hm8tm"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_jsssl"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_yujqa"]
+
+[node name="Planet" type="Node3D" unique_id=571669089]
+script = ExtResource("1_hm8tm")
+
+[node name="PlanetMesh" type="MeshInstance3D" parent="." unique_id=1643412912]
+mesh = SubResource("SphereMesh_jsssl")
+
+[node name="ExoSphere" type="MeshInstance3D" parent="." unique_id=1635229707]
+transparency = 1.0
+mesh = SubResource("SphereMesh_yujqa")
+
+[node name="ExoSphere" type="MeshInstance3D" parent="ExoSphere" unique_id=701225304]
+transparency = 1.0
+mesh = SubResource("SphereMesh_yujqa")
