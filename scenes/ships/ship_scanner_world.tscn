@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ddy2hbmpulueq"]
+
+[ext_resource type="Script" uid="uid://dg0jjclbwsae5" path="res://scripts/ship/computers/scanner_camera.gd" id="5_3y85y"]
+
+[sub_resource type="Environment" id="Environment_jsssl"]
+
+[node name="ShipModel" type="Node3D" unique_id=438927724]
+
+[node name="Camera" type="Camera3D" parent="." unique_id=1928284060]
+current = true
+script = ExtResource("5_3y85y")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1055170249]
+environment = SubResource("Environment_jsssl")
+
+[node name="ShipPosition" type="Node3D" parent="." unique_id=747896878]

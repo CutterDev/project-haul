@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://cffqw136cdo27"]
+
+[ext_resource type="Shader" uid="uid://bcnwu0j83dqla" path="res://shaders/ScannedRoom.gdshader" id="1_ahfq5"]
+[ext_resource type="Script" uid="uid://4isurcgt0oo7" path="res://scripts/ship/computers/scanned_room.gd" id="1_pn57r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jsssl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2qx6"]
+render_priority = 0
+shader = ExtResource("1_ahfq5")
+shader_parameter/albedo_color = Color(0, 0.8784314, 0.78431374, 0.40784314)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jsssl"]
+material = SubResource("ShaderMaterial_b2qx6")
+
+[node name="ScannedRoom" type="Area3D" unique_id=435267986]
+collision_layer = 16777215
+collision_mask = 16777215
+script = ExtResource("1_pn57r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1969568303]
+shape = SubResource("BoxShape3D_jsssl")
+debug_color = Color(0.8980392, 0.18039216, 0.4627451, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=850760830]
+mesh = SubResource("BoxMesh_jsssl")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

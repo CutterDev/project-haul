@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://qbjkhjafft0w"]
+
+[ext_resource type="Texture2D" uid="uid://7cac02wb8pfa" path="res://textures/prototypes/Orange/texture_09.png" id="1_m8hpw"]
+[ext_resource type="PackedScene" uid="uid://6j38i4snarm1" path="res://scenes/ships/lasercannon.tscn" id="2_obt6b"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jsssl"]
+size = Vector3(6, 1, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5c2e"]
+albedo_texture = ExtResource("1_m8hpw")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_jsssl"]
+size = Vector3(6, 1, 6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m8hpw"]
+size = Vector3(6, 1, 6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_obt6b"]
+albedo_texture = ExtResource("1_m8hpw")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_lufgp"]
+size = Vector3(6, 1, 6)
+
+[node name="Model" type="Node3D" unique_id=1183908160]
+
+[node name="Floor3" type="StaticBody3D" parent="." unique_id=1794696624]
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor3" unique_id=1450053631]
+shape = SubResource("BoxShape3D_jsssl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor3" unique_id=1038930437]
+material_override = SubResource("StandardMaterial3D_u5c2e")
+mesh = SubResource("BoxMesh_jsssl")
+
+[node name="Floor4" type="StaticBody3D" parent="." unique_id=965685837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -6)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor4" unique_id=817486047]
+shape = SubResource("BoxShape3D_jsssl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor4" unique_id=223725984]
+material_override = SubResource("StandardMaterial3D_u5c2e")
+mesh = SubResource("BoxMesh_jsssl")
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=992775999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1625526993]
+shape = SubResource("BoxShape3D_jsssl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=270501964]
+material_override = SubResource("StandardMaterial3D_u5c2e")
+mesh = SubResource("BoxMesh_jsssl")
+
+[node name="Laser1" parent="." unique_id=2145241768 instance=ExtResource("2_obt6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -2.5)
+
+[node name="Laser2" parent="." unique_id=1650661219 instance=ExtResource("2_obt6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2.5)
+
+[node name="Floor2" type="StaticBody3D" parent="." unique_id=2036538224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -6)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2" unique_id=1267916127]
+shape = SubResource("BoxShape3D_m8hpw")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor2" unique_id=1383541059]
+material_override = SubResource("StandardMaterial3D_obt6b")
+mesh = SubResource("BoxMesh_lufgp")
