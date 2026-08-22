@@ -10,6 +10,7 @@ size = Vector3(6, 3, 6)
 [node name="Ship" type="Node3D" unique_id=92293080]
 script = ExtResource("1_iyjb8")
 model_path = "uid://qbjkhjafft0w"
+is_model = null
 
 [node name="Rooms" type="Node3D" parent="." unique_id=1087965910]
 

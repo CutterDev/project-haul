@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://1n340fkai7j4" path="res://scenes/ships/computer.tscn" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://c7a11wov4wq2m" path="res://scenes/ships/computer-scanner.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dtchkiy8u1roc" path="res://scenes/ships/ship.tscn" id="6_tefeu"]
+[ext_resource type="PackedScene" uid="uid://6j38i4snarm1" path="res://scenes/ships/lasercannon.tscn" id="8_tipki"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jsssl"]
 size = Vector3(10, 1, 10)
@@ -25,6 +26,7 @@ ship_node = NodePath("Ship")
 
 [node name="Ship2" parent="." unique_id=92293080 instance=ExtResource("6_tefeu")]
 transform = Transform3D(-0.9272274, 0.3744988, -8.742278e-08, 0.3744988, 0.9272274, 0, 8.106079e-08, -3.2739727e-08, -1, -2, 2, 1.5)
+is_model = false
 
 [node name="Ship" type="StaticBody3D" parent="." unique_id=2122799523]
 
@@ -46,3 +48,6 @@ transform = Transform3D(0.85768217, 0, -0.51418024, 0, 1, 0, 0.51418024, 0, 0.85
 [node name="ShipScanner" parent="Ship" unique_id=1123764209 node_paths=PackedStringArray("ship_target") instance=ExtResource("6_o6xl0")]
 transform = Transform3D(0.73299086, 0, 0.6802385, 0, 1, 0, -0.6802385, 0, 0.73299086, -2.268402, 1.4961057, 0)
 ship_target = NodePath("../../Ship2")
+
+[node name="Laser" parent="Ship" unique_id=2145241768 groups=["Weapons"] instance=ExtResource("8_tipki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7644353, -3.6816535)

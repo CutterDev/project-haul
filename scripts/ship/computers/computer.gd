@@ -1,4 +1,8 @@
 extends Node3D
+class_name ComputerScreen
+
+# Add this at the top of ComputerScreen.gd
+signal screen_input_received(event: InputEvent, pos_2d: Vector2)
 
 @onready var node_viewport: SubViewport = $SubViewport
 @onready var node_quad: MeshInstance3D = $Quad
@@ -13,7 +17,8 @@ var last_event_time: float = -1.0
 # Debug indicator node
 var debug_cube: MeshInstance3D
 
-
+# Current target of the mouse when mouse hovers room
+var mouse_target: Area3D = null
 func _ready():
 	node_area.mouse_entered.connect(_mouse_entered_area)
 	node_area.mouse_exited.connect(_mouse_exited_area)
@@ -100,6 +105,8 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 		uv_y * float(node_viewport.size.y)
 	)
 
+	# Emit signal so ComputerHandler receives both event AND mapped 2D position
+	screen_input_received.emit(event, event_pos_2d)
 	if not target_camera:
 		target_camera = node_viewport.get_camera_3d()
 
@@ -121,11 +128,24 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
 	
 		if not hit.is_empty():
-			var collider = hit["collider"]
+			var collider = hit.collider
+			print("Collider has method: ", collider.has_method("on_mouse_entered"))
 			if collider.has_method("on_mouse_entered"):
+				if collider != mouse_target:
+					if mouse_target != null:
+						mouse_target.on_mouse_exited()
 				collider.on_mouse_entered()
+				mouse_target = collider
+			else:
+				if mouse_target != null:
+					mouse_target.on_mouse_exited()
+				mouse_target = null
 			if debug_cube:
 				debug_cube.global_position = hit["position"]
+
 		else:
+			if mouse_target != null:
+				mouse_target.on_mouse_exited()
+			mouse_target = null
 			if debug_cube:
 				debug_cube.global_position = ray_origin + ray_dir * 5.0

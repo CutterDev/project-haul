@@ -9,8 +9,13 @@ class_name ShipSystem
 @export var is_model: bool = false
 var hull_health: float = 1000
 var max_health: float = 1000
+var shield_health: float = 500
+
 
 var rooms: Array[ShipRoom] = []
+var selected_weapon: Weapon = null
+var selected_wep_num: int = -1
+var weapons: Array [Weapon]
 
 func _ready() -> void:
 	print("ready")
