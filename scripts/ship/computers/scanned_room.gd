@@ -23,11 +23,9 @@ func _ready() -> void:
 
 
 func on_mouse_exited() -> void:
-	print("Mouse Exited")
 	set_model_color(Color.from_rgba8(0, 224, 200, 104))
 
 func on_mouse_entered() -> void:
-	print("Mouse Entered")
 	set_model_color(Color.from_rgba8(0, 224, 200, 200))
 
 

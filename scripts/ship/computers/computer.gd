@@ -3,6 +3,7 @@ class_name ComputerScreen
 
 # Add this at the top of ComputerScreen.gd
 signal screen_input_received(event: InputEvent, pos_2d: Vector2)
+signal interaction_clicked(target: Area3D)
 
 @onready var node_viewport: SubViewport = $SubViewport
 @onready var node_quad: MeshInstance3D = $Quad
@@ -106,7 +107,9 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 	)
 
 	# Emit signal so ComputerHandler receives both event AND mapped 2D position
-	screen_input_received.emit(event, event_pos_2d)
+
+	var input_handled: bool = false
+
 	if not target_camera:
 		target_camera = node_viewport.get_camera_3d()
 
@@ -129,7 +132,6 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 	
 		if not hit.is_empty():
 			var collider = hit.collider
-			print("Collider has method: ", collider.has_method("on_mouse_entered"))
 			if collider.has_method("on_mouse_entered"):
 				if collider != mouse_target:
 					if mouse_target != null:
@@ -149,3 +151,8 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 			mouse_target = null
 			if debug_cube:
 				debug_cube.global_position = ray_origin + ray_dir * 5.0
+
+	if mouse_target != null && event is InputEventMouseButton  and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed:
+		interaction_clicked.emit(mouse_target)
+	else:
+		screen_input_received.emit(event, event_pos_2d)

@@ -5,9 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://dpubrhoajeadw" path="res://scenes/player/player.tscn" id="2_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://dto8n7k5oim7k" path="res://scenes/planets/planet.tscn" id="2_tefeu"]
 [ext_resource type="PackedScene" uid="uid://1n340fkai7j4" path="res://scenes/ships/computer.tscn" id="3_sugp2"]
+[ext_resource type="Script" uid="uid://b5vfw5fjc37n3" path="res://scripts/ship/player_ship_system.gd" id="4_85g3d"]
 [ext_resource type="PackedScene" uid="uid://c7a11wov4wq2m" path="res://scenes/ships/computer-scanner.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dtchkiy8u1roc" path="res://scenes/ships/ship.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://6j38i4snarm1" path="res://scenes/ships/lasercannon.tscn" id="8_tipki"]
+[ext_resource type="Script" uid="uid://vigofeoplkqe" path="res://scripts/UI/prototype_hud.gd" id="10_choun"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jsssl"]
 size = Vector3(10, 1, 10)
@@ -29,6 +31,7 @@ transform = Transform3D(-0.9272274, 0.3744988, -8.742278e-08, 0.3744988, 0.92722
 is_model = false
 
 [node name="Ship" type="StaticBody3D" parent="." unique_id=2122799523]
+script = ExtResource("4_85g3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ship" unique_id=151694250]
 shape = SubResource("BoxShape3D_jsssl")
@@ -49,5 +52,39 @@ transform = Transform3D(0.85768217, 0, -0.51418024, 0, 1, 0, 0.51418024, 0, 0.85
 transform = Transform3D(0.73299086, 0, 0.6802385, 0, 1, 0, -0.6802385, 0, 0.73299086, -2.268402, 1.4961057, 0)
 ship_target = NodePath("../../Ship2")
 
-[node name="Laser" parent="Ship" unique_id=2145241768 groups=["Weapons"] instance=ExtResource("8_tipki")]
+[node name="Weapons" type="Node3D" parent="Ship" unique_id=1330099209]
+
+[node name="Laser" parent="Ship/Weapons" unique_id=2145241768 groups=["Weapons"] instance=ExtResource("8_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7644353, -3.6816535)
+ammo_path = "res://scenes/weapons/laser_prototype.tscn"
+
+[node name="Laser2" parent="Ship/Weapons" unique_id=1477546348 groups=["Weapons"] instance=ExtResource("8_tipki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6649888, 0.7644353, -3.8533592)
+ammo_path = "res://scenes/weapons/laser_prototype.tscn"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1736888219]
+follow_viewport_enabled = true
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=909836416]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("10_choun")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=743141225]
+layout_mode = 0
+offset_left = 57.0
+offset_top = 906.0
+offset_right = 171.0
+offset_bottom = 960.0
+
+[node name="Weapon" type="Label" parent="CanvasLayer/HUD/VBoxContainer" unique_id=1834350159]
+layout_mode = 2
+text = "Weapon Name"
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/HUD/VBoxContainer" unique_id=1626554270]
+layout_mode = 2

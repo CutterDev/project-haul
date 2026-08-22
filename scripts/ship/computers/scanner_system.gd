@@ -1,5 +1,9 @@
 extends ComputerHandler
 # Computer System that handles the Scanner for ships
+class_name ScannerSystem
+
+
+signal room_targeted(target: Area3D)
 
 
 @export var ship_target: ShipSystem
@@ -24,7 +28,7 @@ var is_rotating: bool = false
 
 func _ready() -> void:
 	computer.screen_input_received.connect(_on_computer_screen_input)
-	
+	computer.interaction_clicked.connect(_interaction)
 	var model_scene = load(ship_target.model_path)
 	ship_model = model_scene.instantiate()
 	ship_model.rotation =  ship_target.rotation
@@ -87,6 +91,8 @@ func _on_computer_screen_input(event: InputEvent, event_pos_2d: Vector2) -> void
 			# Rotate around camera-aligned local axes
 			ship_model.rotate(local_up, delta_2d.x * rotation_sensitivity)
 			ship_model.rotate(local_right, -delta_2d.y * rotation_sensitivity)
+
+
 func create_box_area(room_name: String, box_size: Vector3, area_position: Vector3) -> Area3D:
 	var newroom = packed_scannedroom.instantiate()
 	newroom.name = room_name
@@ -99,3 +105,10 @@ func create_box_area(room_name: String, box_size: Vector3, area_position: Vector
 
 func _on_area_body_entered(body: Node3D) -> void:
 	print("Body entered area: ", body.name)
+
+func _interaction(target: Area3D):
+	# can do something here 
+	print("Target: ", target)
+	for room in ship_target.rooms:
+		if room.name == target.name:
+			room_targeted.emit(room)
