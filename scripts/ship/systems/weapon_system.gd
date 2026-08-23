@@ -1,2 +1,3 @@
 extends PoweredSystem
 
+class_name WeaponSystem

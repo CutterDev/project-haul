@@ -6,7 +6,7 @@ class_name Weapon
 @export var fire_rate_per_shot: float = 0.35
 @export var power_needed: int = 1
 @export var shots: int = 3
- 
+
 # Damage per shot
 @export var damage: float = 0.0
 

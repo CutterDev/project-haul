@@ -9,7 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://c7a11wov4wq2m" path="res://scenes/ships/computer-scanner.tscn" id="6_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://dtchkiy8u1roc" path="res://scenes/ships/ship.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://6j38i4snarm1" path="res://scenes/ships/lasercannon.tscn" id="8_tipki"]
+[ext_resource type="Script" uid="uid://d200upb2molrd" path="res://scripts/ship/systems/power_system.gd" id="10_a8y0u"]
 [ext_resource type="Script" uid="uid://vigofeoplkqe" path="res://scripts/UI/prototype_hud.gd" id="10_choun"]
+[ext_resource type="Script" uid="uid://curlutkpryv6j" path="res://scripts/ship/systems/oxygen_system.gd" id="11_jkv2x"]
+[ext_resource type="Script" uid="uid://b1akfekq3c7ri" path="res://scripts/ship/systems/shield_system.gd" id="12_jbj1t"]
+[ext_resource type="Script" uid="uid://b2k4fpv6g6jc6" path="res://scripts/ship/systems/weapon_system.gd" id="13_muem4"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jsssl"]
 size = Vector3(10, 1, 10)
@@ -28,7 +32,6 @@ ship_node = NodePath("Ship")
 
 [node name="Ship2" parent="." unique_id=92293080 instance=ExtResource("6_tefeu")]
 transform = Transform3D(-0.9272274, 0.3744988, -8.742278e-08, 0.3744988, 0.9272274, 0, 8.106079e-08, -3.2739727e-08, -1, -2, 2, 1.5)
-is_model = false
 
 [node name="Ship" type="StaticBody3D" parent="." unique_id=2122799523]
 script = ExtResource("4_85g3d")
@@ -61,6 +64,21 @@ ammo_path = "res://scenes/weapons/laser_prototype.tscn"
 [node name="Laser2" parent="Ship/Weapons" unique_id=1477546348 groups=["Weapons"] instance=ExtResource("8_tipki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6649888, 0.7644353, -3.8533592)
 ammo_path = "res://scenes/weapons/laser_prototype.tscn"
+
+[node name="PowerSystem" type="Node3D" parent="Ship" unique_id=1134567746]
+script = ExtResource("10_a8y0u")
+
+[node name="OxygenSystem" type="Node3D" parent="Ship/PowerSystem" unique_id=1812779012]
+script = ExtResource("11_jkv2x")
+metadata/_custom_type_script = "uid://curlutkpryv6j"
+
+[node name="ShieldSystem" type="Node3D" parent="Ship/PowerSystem" unique_id=1213478134]
+script = ExtResource("12_jbj1t")
+metadata/_custom_type_script = "uid://b1akfekq3c7ri"
+
+[node name="WeaponSystem" type="Node3D" parent="Ship/PowerSystem" unique_id=1192028901]
+script = ExtResource("13_muem4")
+metadata/_custom_type_script = "uid://b2k4fpv6g6jc6"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1736888219]
 follow_viewport_enabled = true

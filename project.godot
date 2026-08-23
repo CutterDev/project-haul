@@ -71,6 +71,8 @@ debug_reset={
 3d_physics/layer_2="Environment"
 3d_physics/layer_3="Projectiles"
 3d_physics/layer_4="Interact"
+3d_physics/layer_5="PlayerRooms"
+3d_physics/layer_6="EnemyRooms"
 
 [physics]
 

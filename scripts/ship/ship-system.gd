@@ -21,6 +21,7 @@ func _ready() -> void:
 	
 	if has_node("Rooms"):
 		for room in $Rooms.get_children():
+			print(room.name)
 			rooms.append(room)
 
 func get_hull_integrity() -> float:

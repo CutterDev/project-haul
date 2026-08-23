@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://cid3hnma2uwxr"]
+
+[ext_resource type="Script" uid="uid://b5vfw5fjc37n3" path="res://scripts/ship/player_ship_system.gd" id="1_jn7en"]
+[ext_resource type="Texture2D" uid="uid://cihpmnpe0gbdb" path="res://textures/prototypes/Orange/texture_08.png" id="2_42wut"]
+[ext_resource type="PackedScene" uid="uid://1n340fkai7j4" path="res://scenes/ships/computer.tscn" id="3_bgnsv"]
+[ext_resource type="PackedScene" uid="uid://dpubrhoajeadw" path="res://scenes/player/player.tscn" id="4_cv1jh"]
+[ext_resource type="PackedScene" uid="uid://c7a11wov4wq2m" path="res://scenes/ships/computer-scanner.tscn" id="5_npnf2"]
+[ext_resource type="PackedScene" uid="uid://6j38i4snarm1" path="res://scenes/ships/lasercannon.tscn" id="6_vkpf8"]
+[ext_resource type="Script" uid="uid://d200upb2molrd" path="res://scripts/ship/systems/power_system.gd" id="7_f8167"]
+[ext_resource type="Script" uid="uid://curlutkpryv6j" path="res://scripts/ship/systems/oxygen_system.gd" id="8_0oqjx"]
+[ext_resource type="Script" uid="uid://b1akfekq3c7ri" path="res://scripts/ship/systems/shield_system.gd" id="9_m5qgm"]
+[ext_resource type="Script" uid="uid://b2k4fpv6g6jc6" path="res://scripts/ship/systems/weapon_system.gd" id="10_olog5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jsssl"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0wfyh"]
+albedo_texture = ExtResource("2_42wut")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_jsssl"]
+size = Vector3(10, 1, 10)
+
+[node name="Ship" type="StaticBody3D" unique_id=384079585]
+script = ExtResource("1_jn7en")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=619854838]
+shape = SubResource("BoxShape3D_jsssl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=98975219]
+material_override = SubResource("StandardMaterial3D_0wfyh")
+mesh = SubResource("BoxMesh_jsssl")
+
+[node name="Computer" parent="." unique_id=1194921621 instance=ExtResource("3_bgnsv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5079212, -1.7430673)
+
+[node name="Computer2" parent="." unique_id=935818238 instance=ExtResource("3_bgnsv")]
+transform = Transform3D(0.85768217, 0, -0.51418024, 0, 1, 0, 0.51418024, 0, 0.85768217, 1.8533177, 1.5079212, -1.265569)
+
+[node name="Player" parent="." unique_id=1350014039 instance=ExtResource("4_cv1jh")]
+
+[node name="ShipScanner" parent="." unique_id=174482264 instance=ExtResource("5_npnf2")]
+transform = Transform3D(0.73299086, 0, 0.6802385, 0, 1, 0, -0.6802385, 0, 0.73299086, -2.268402, 1.4961057, 0)
+
+[node name="Weapons" type="Node3D" parent="." unique_id=1813013100]
+
+[node name="Laser" parent="Weapons" unique_id=2145241768 groups=["Weapons"] instance=ExtResource("6_vkpf8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7644353, -3.6816535)
+ammo_path = "res://scenes/weapons/laser_prototype.tscn"
+
+[node name="Laser2" parent="Weapons" unique_id=975766691 groups=["Weapons"] instance=ExtResource("6_vkpf8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6649888, 0.7644353, -3.8533592)
+ammo_path = "res://scenes/weapons/laser_prototype.tscn"
+
+[node name="PowerSystem" type="Node3D" parent="." unique_id=818782195]
+script = ExtResource("7_f8167")
+
+[node name="OxygenSystem" type="Node3D" parent="PowerSystem" unique_id=680167632]
+script = ExtResource("8_0oqjx")
+metadata/_custom_type_script = "uid://curlutkpryv6j"
+
+[node name="ShieldSystem" type="Node3D" parent="PowerSystem" unique_id=416832077]
+script = ExtResource("9_m5qgm")
+metadata/_custom_type_script = "uid://b1akfekq3c7ri"
+
+[node name="WeaponSystem" type="Node3D" parent="PowerSystem" unique_id=699420470]
+script = ExtResource("10_olog5")
+metadata/_custom_type_script = "uid://b2k4fpv6g6jc6"
+
+[node name="Rooms" type="Node3D" parent="." unique_id=1623771011]
+
+[node name="Area3D" type="Area3D" parent="Rooms" unique_id=970906863]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Area3D" unique_id=666656792]

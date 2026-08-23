@@ -12,7 +12,7 @@ signal interaction_clicked(target: Area3D)
 var target_camera: Camera3D
 
 var is_mouse_inside = false
-var last_event_pos_2d = null
+var last_event_pos_2d: Vector2 = Vector2.INF
 var last_event_time: float = -1.0
 
 # Debug indicator node
@@ -75,51 +75,79 @@ func _mouse_exited_area():
 		debug_cube.visible = false
 
 
-func _unhandled_input(event: InputEvent):
+func _unhandled_input(event):
+	# Check if the event is a non-mouse/non-touch event
+	for mouse_event in [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]:
+		if is_instance_of(event, mouse_event):
+			# If the event is a mouse/touch event, then we can ignore it here, because it will be
+			# handled via Physics Picking.
+			return
 	node_viewport.push_input(event)
-
+	
 func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
-	if not is_mouse_inside:
+	if not is_mouse_inside and (last_event_pos_2d == null or last_event_pos_2d == Vector2.INF):
 		return
 
+	var now: float = Time.get_ticks_msec() / 1000.0
 	var quad_size: Vector2 = node_quad.mesh.size
-
-# 1. Get raw hit position relative to the Quad's center local space
 	var local_pos: Vector3 = node_quad.global_transform.affine_inverse() * event_position
-	
-	# Account for global mesh scaling on the quad instance
-	var quad_scale: Vector3 = node_quad.global_transform.basis.get_scale()
-	var effective_size := Vector2(
-		quad_size.x * quad_scale.x,
-		quad_size.y * quad_scale.y
-	)
 
-	# 2. Calculate pure normalized UV coordinates (0.0 to 1.0)
-	var uv_x: float = clamp((local_pos.x / quad_size.x) + 0.5, 0.0, 1.0)
-	
-	# FIX: Divide local_pos.y by 2.0 to eliminate the 2x height offset
-	var uv_y: float = clamp(0.5 - (local_pos.y / (quad_size.y * 1.5)), 0.0, 1.0)
+	var event_pos_2d: Vector2
+	var raycast_pos_2d: Vector2
 
-	# 3. Map directly to integer SubViewport pixel space
-	var event_pos_2d := Vector2(
-		uv_x * float(node_viewport.size.x),
-		uv_y * float(node_viewport.size.y)
-	)
+	if is_mouse_inside:
+		# Standard 1:1 UV Mapping for 2D SubViewport UI interaction
+		var uv_x: float = clamp((local_pos.x / quad_size.x) + 0.5, 0.0, 1.0)
+		var uv_y: float = clamp(0.5 - (local_pos.y / quad_size.y), 0.0, 1.0)
 
-	# Emit signal so ComputerHandler receives both event AND mapped 2D position
+		event_pos_2d = Vector2(
+			uv_x * float(node_viewport.size.x),
+			uv_y * float(node_viewport.size.y)
+		)
 
-	var input_handled: bool = false
+		# Custom aspect ratio mapping specifically for the inner 3D Raycast camera
+		var ray_uv_y: float = clamp(0.5 - (local_pos.y / (quad_size.y * 1.5)), 0.0, 1.0)
+		raycast_pos_2d = Vector2(
+			uv_x * float(node_viewport.size.x),
+			ray_uv_y * float(node_viewport.size.y)
+		)
+	elif last_event_pos_2d != null and last_event_pos_2d != Vector2.INF:
+		event_pos_2d = last_event_pos_2d
+		raycast_pos_2d = last_event_pos_2d
 
+	# Duplicate the event so modifications don't leak to global inputs
+	var viewport_event: InputEvent = event.duplicate()
+
+	# Mutate input event coordinates for Control components inside SubViewport
+	if viewport_event is InputEventMouse:
+		viewport_event.position = event_pos_2d
+		viewport_event.global_position = event_pos_2d
+
+		if viewport_event is InputEventMouseMotion:
+			if last_event_pos_2d == null or last_event_pos_2d == Vector2.INF:
+				viewport_event.relative = Vector2.ZERO
+				viewport_event.velocity = Vector2.ZERO
+			else:
+				viewport_event.relative = event_pos_2d - last_event_pos_2d
+				var delta_time: float = now - last_event_time
+				viewport_event.velocity = viewport_event.relative / delta_time if delta_time > 0.0 else Vector2.ZERO
+
+	# Store current frame state
+	last_event_pos_2d = event_pos_2d
+	last_event_time = now
+
+	# Dispatch accurate 2D input coordinates to UI controls inside SubViewport
+	node_viewport.push_input(viewport_event)
+
+	# SubViewport 3D raycasting using the custom aspect-adjusted raycast position
 	if not target_camera:
 		target_camera = node_viewport.get_camera_3d()
 
 	if target_camera:
-		# CRITICAL FIX: Lock camera aspect mode to prevent Y-scaling stretch distortion
 		target_camera.keep_aspect = Camera3D.KEEP_WIDTH
 
-		# Project frustum rays precisely from camera near and far planes
-		var ray_origin: Vector3 = target_camera.project_position(event_pos_2d, target_camera.near)
-		var ray_far: Vector3 = target_camera.project_position(event_pos_2d, target_camera.far)
+		var ray_origin: Vector3 = target_camera.project_position(raycast_pos_2d, target_camera.near)
+		var ray_far: Vector3 = target_camera.project_position(raycast_pos_2d, target_camera.far)
 		var ray_dir: Vector3 = (ray_far - ray_origin).normalized()
 
 		var space_state = target_camera.get_world_3d().direct_space_state
@@ -129,30 +157,31 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
 		var hit = space_state.intersect_ray(query)
 
-	
 		if not hit.is_empty():
 			var collider = hit.collider
 			if collider.has_method("on_mouse_entered"):
 				if collider != mouse_target:
 					if mouse_target != null:
 						mouse_target.on_mouse_exited()
-				collider.on_mouse_entered()
-				mouse_target = collider
+					collider.on_mouse_entered()
+					mouse_target = collider
 			else:
 				if mouse_target != null:
 					mouse_target.on_mouse_exited()
 				mouse_target = null
+
 			if debug_cube:
 				debug_cube.global_position = hit["position"]
-
 		else:
 			if mouse_target != null:
 				mouse_target.on_mouse_exited()
 			mouse_target = null
+
 			if debug_cube:
 				debug_cube.global_position = ray_origin + ray_dir * 5.0
 
-	if mouse_target != null && event is InputEventMouseButton  and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed:
+	# Signal emission dispatch
+	if mouse_target != null and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed:
 		interaction_clicked.emit(mouse_target)
 	else:
 		screen_input_received.emit(event, event_pos_2d)

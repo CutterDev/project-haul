@@ -6,7 +6,7 @@ var shield_per_bar: float = 250
 
 
 func _ready():
-	minimum_power_needed = 2
+	pass
 
 
 
