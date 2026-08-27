@@ -15,7 +15,7 @@ var is_mouse_inside = false
 var last_event_pos_2d: Vector2 = Vector2.INF
 var last_event_time: float = -1.0
 
-# Debug indicator node
+# Debug indicator node 
 var debug_cube: MeshInstance3D
 
 # Current target of the mouse when mouse hovers room
@@ -28,6 +28,8 @@ func _ready():
 	target_camera = node_viewport.get_camera_3d()
 	_setup_debug_cube()
 	_sync_aspect_ratios()
+
+
 func _sync_aspect_ratios() -> void:
 	var quad_size: Vector2 = node_quad.mesh.size
 	var quad_aspect: float = quad_size.x / quad_size.y

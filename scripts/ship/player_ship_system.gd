@@ -1,4 +1,4 @@
-extends ShipSystem
+extends Ship
 
 @onready var weapon_system: ScannerSystem = $ShipScanner
 

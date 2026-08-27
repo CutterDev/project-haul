@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c8qh44veyfr6j"]
+
+[node name="PowerNode" type="ColorRect" unique_id=898918208]
+custom_minimum_size = Vector2(50, 50)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.89492244, 0.89492244, 0.8949224, 1)

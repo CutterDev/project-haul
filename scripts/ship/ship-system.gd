@@ -1,6 +1,6 @@
 extends Node3D
 ## Holds the Power, oxygen etc
-class_name ShipSystem
+class_name Ship
 
 @export_file("*.tscn", "*.scn") var model_path: String
 @export var is_model: bool = false

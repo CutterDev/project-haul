@@ -21,6 +21,9 @@ uv1_triplanar = true
 [sub_resource type="BoxMesh" id="BoxMesh_jsssl"]
 size = Vector3(10, 1, 10)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_yujqa"]
+size = Vector3(5, 3, 5)
+
 [node name="Ship" type="StaticBody3D" unique_id=384079585]
 script = ExtResource("1_jn7en")
 
@@ -69,6 +72,20 @@ metadata/_custom_type_script = "uid://b2k4fpv6g6jc6"
 
 [node name="Rooms" type="Node3D" parent="." unique_id=1623771011]
 
-[node name="Area3D" type="Area3D" parent="Rooms" unique_id=970906863]
+[node name="Weapons" type="Area3D" parent="Rooms" unique_id=970906863]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -2.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Area3D" unique_id=666656792]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Weapons" unique_id=666656792]
+shape = SubResource("BoxShape3D_yujqa")
+
+[node name="Oxygen" type="Area3D" parent="Rooms" unique_id=1403260536]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, 2.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Oxygen" unique_id=598777811]
+shape = SubResource("BoxShape3D_yujqa")
+
+[node name="Shields" type="Area3D" parent="Rooms" unique_id=1475371454]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, 2.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rooms/Shields" unique_id=117113051]
+shape = SubResource("BoxShape3D_yujqa")

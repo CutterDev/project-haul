@@ -6,7 +6,7 @@ class_name ScannerSystem
 signal room_targeted(target: Area3D)
 
 
-@export var ship_target: ShipSystem
+@export var ship_target: Ship
 @export var reset_rotation_speed: float = 10.0
 @export var rotation_sensitivity: float = 0.005
 

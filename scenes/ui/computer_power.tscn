@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://dt12vjiu3krkb"]
+
+[ext_resource type="Script" uid="uid://dcodnenrwe62d" path="res://scripts/UI/computer_power.gd" id="1_s0ewr"]
+[ext_resource type="Shader" uid="uid://dcvr6r1j1k4vq" path="res://scenes/ships/crt_shader.gdshader" id="2_awsj8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tvu5m"]
+shader = ExtResource("2_awsj8")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.108
+shader_parameter/grille_opacity = 0.265
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 3.97
+shader_parameter/roll_size = 9.975
+shader_parameter/roll_variation = 1.48
+shader_parameter/distort_intensity = 0.024
+shader_parameter/noise_opacity = 0.254
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.226
+shader_parameter/aberration = 0.015
+shader_parameter/brightness = 1.45
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.165
+shader_parameter/vignette_opacity = 0.2
+
+[node name="Control" type="Control" unique_id=1126058538]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s0ewr")
+
+[node name="Panel" type="Panel" parent="." unique_id=1700929050]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=287640070]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1662138770]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=2105111446]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TotalPower" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/MarginContainer" unique_id=991823093]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="PowerSystems" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=549233890]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=931794620]
+z_index = 1
+material = SubResource("ShaderMaterial_tvu5m")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

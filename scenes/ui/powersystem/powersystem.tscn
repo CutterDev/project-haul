@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://oig7nxxywdgo"]
+
+[ext_resource type="Script" uid="uid://dkj7ep4p3gbsi" path="res://scripts/UI/powersystem.gd" id="1_ej33n"]
+
+[node name="PowerSystem" type="Control" unique_id=242095476]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_ej33n")
+
+[node name="Vbox" type="VBoxContainer" parent="." unique_id=104512329]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Vbox" unique_id=737271038]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="Vbox/Panel" unique_id=399781467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PowerNodes" type="VBoxContainer" parent="Vbox/Panel/Margin" unique_id=1711931576]
+layout_mode = 2
+alignment = 2
+
+[node name="Increase" type="Button" parent="Vbox" unique_id=119799041]
+layout_mode = 2
+text = "+"
+
+[node name="Margin" type="MarginContainer" parent="Vbox" unique_id=904999548]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SystemName" type="Label" parent="Vbox/Margin" unique_id=123376371]
+layout_mode = 2
+text = "SystemName"
+
+[node name="Decrease" type="Button" parent="Vbox" unique_id=343793893]
+layout_mode = 2
+text = "-"
