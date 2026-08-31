@@ -1,6 +1,6 @@
 extends Ship
 
-@onready var weapon_system: ScannerSystem = $ShipScanner
+@onready var weapon_system: ScannerSystem = $Computers/WeaponSystem
 
 @onready var hud = $"../CanvasLayer/HUD"
 

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://oig7nxxywdgo"]
 
-[ext_resource type="Script" uid="uid://dkj7ep4p3gbsi" path="res://scripts/UI/powersystem.gd" id="1_ej33n"]
+[ext_resource type="Script" uid="uid://dkj7ep4p3gbsi" path="res://scripts/ship/computers/systems/powersystem.gd" id="1_ej33n"]
 
 [node name="PowerSystem" type="Control" unique_id=242095476]
 layout_mode = 3

@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bmuy6nxlbym6a"]
+
+[ext_resource type="Script" uid="uid://2xx0srvhpq27" path="res://scripts/ship/computers/systems/computersystem_oxygen.gd" id="1_ioije"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6ifb"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.016690087, 0.12428575, 0.08733053, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="Control" type="Control" unique_id=1906009483]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ioije")
+
+[node name="Panel" type="Panel" parent="." unique_id=811339599]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_c6ifb")
+
+[node name="HB" type="HBoxContainer" parent="." unique_id=486132162]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -20.0
+offset_right = 54.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HB" unique_id=830284407]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Oxygen level:"
+
+[node name="Oxygen" type="Label" parent="HB" unique_id=507889452]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30

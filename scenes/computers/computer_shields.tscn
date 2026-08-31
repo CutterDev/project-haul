@@ -1,8 +1,9 @@
-[gd_scene format=4 uid="uid://b3iwcq0l857qh"]
+[gd_scene format=4 uid="uid://dt4oc2j2bfyj2"]
 
-[ext_resource type="Script" uid="uid://bipf4damf807n" path="res://scripts/ship/computers/computer_handler.gd" id="1_lbo4v"]
-[ext_resource type="Script" uid="uid://1gsf8jvaffay" path="res://scripts/ship/computers/computer.gd" id="2_hl75h"]
-[ext_resource type="PackedScene" uid="uid://dt12vjiu3krkb" path="res://scenes/ui/powersystem_ui.tscn" id="3_twuvl"]
+[ext_resource type="Script" uid="uid://bipf4damf807n" path="res://scripts/ship/computers/computer_handler.gd" id="1_idwxv"]
+[ext_resource type="Script" uid="uid://1gsf8jvaffay" path="res://scripts/ship/computers/computer.gd" id="2_voxm1"]
+[ext_resource type="PackedScene" uid="uid://dkr12atymxoia" path="res://scenes/ui/shields_ui.tscn" id="3_idwxv"]
+[ext_resource type="Shader" uid="uid://dcvr6r1j1k4vq" path="res://scenes/ships/crt_shader.gdshader" id="4_y1htt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5arm"]
 albedo_color = Color(0.334122, 0.334122, 0.334122, 1)
@@ -10,6 +11,30 @@ albedo_color = Color(0.334122, 0.334122, 0.334122, 1)
 [sub_resource type="QuadMesh" id="QuadMesh_4arys"]
 resource_local_to_scene = true
 size = Vector2(0.4, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t3l2h"]
+shader = ExtResource("4_y1htt")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.108
+shader_parameter/grille_opacity = 0.265
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 3.97
+shader_parameter/roll_size = 9.975
+shader_parameter/roll_variation = 1.48
+shader_parameter/distort_intensity = 0.024
+shader_parameter/noise_opacity = 0.254
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.226
+shader_parameter/aberration = 0.015
+shader_parameter/brightness = 1.45
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.0
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.165
+shader_parameter/vignette_opacity = 0.2
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wosnj"]
 viewport_path = NodePath("Computer/SubViewport")
@@ -108,13 +133,13 @@ albedo_color = Color(0.113665, 0.113665, 0.113665, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_jsssl"]
 size = Vector3(0.45, 0.35, 0.45)
 
-[node name="Computer" type="Area3D" unique_id=1194921621]
+[node name="ShieldSystem" type="Area3D" unique_id=1194921621]
 collision_layer = 8
 collision_mask = 0
-script = ExtResource("1_lbo4v")
+script = ExtResource("1_idwxv")
 
 [node name="Computer" type="Node3D" parent="." unique_id=2126850080]
-script = ExtResource("2_hl75h")
+script = ExtResource("2_voxm1")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Computer" unique_id=1359444303]
 
@@ -138,7 +163,18 @@ physics_object_picking = true
 size = Vector2i(1000, 750)
 render_target_update_mode = 4
 
-[node name="Control" parent="Computer/SubViewport" unique_id=1126058538 instance=ExtResource("3_twuvl")]
+[node name="Control" parent="Computer/SubViewport" unique_id=2068567044 instance=ExtResource("3_idwxv")]
+
+[node name="ColorRect" type="ColorRect" parent="Computer/SubViewport/Control" unique_id=1124476019]
+z_index = 1
+material = SubResource("ShaderMaterial_t3l2h")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Screen" type="MeshInstance3D" parent="Computer" unique_id=1188381063]
 transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0, 0, 0.213525)

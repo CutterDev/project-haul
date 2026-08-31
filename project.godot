@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ShipManager="*uid://ue7n1sa7b3g"
 SpaceScale="*uid://cer7f200qdeyx"
+PlayerManager="*uid://bnbwfiqoddhd7"
 
 [display]
 

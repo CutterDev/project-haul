@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://e4dxxio0qa4h"]
+
+[ext_resource type="Script" uid="uid://cx2hrbqx8stal" path="res://scripts/UI/weaponselection_item.gd" id="1_i70wa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jsssl"]
+
+[node name="Weapon" type="MarginContainer" unique_id=367482487]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+script = ExtResource("1_i70wa")
+
+[node name="Panel" type="Panel" parent="." unique_id=1174562882]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Panel" unique_id=5811548]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 50.0
+grow_horizontal = 0
+text = "+"
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1553696371]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1699044509]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=318665204]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WeaponName" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1366651826]
+layout_mode = 2
+text = "Weapon Name"
+
+[node name="Offline" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=751400361]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Offline" unique_id=917891311]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Offline"
+label_settings = SubResource("LabelSettings_jsssl")
+
+[node name="Online" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1749651036]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Online" unique_id=2142346533]
+layout_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/Online" unique_id=226545825]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+show_percentage = false
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=155877265]
+layout_mode = 2

@@ -7,6 +7,7 @@ var speed = 5
 var jump_speed = 5
 var mouse_sensitivity = 0.002
 
+
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var particles: GPUParticles3D = $Camera3D/SpeedParticles
 var particle_material: ParticleProcessMaterial

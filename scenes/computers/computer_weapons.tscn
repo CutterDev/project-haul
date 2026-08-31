@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://dn35nvlp3cr8s" path="res://scripts/ship/computers/scanner_system.gd" id="1_jwiw5"]
 [ext_resource type="Script" uid="uid://1gsf8jvaffay" path="res://scripts/ship/computers/computer.gd" id="2_m0ytd"]
 [ext_resource type="PackedScene" uid="uid://ddy2hbmpulueq" path="res://scenes/ships/ship_scanner_world.tscn" id="3_yw5oo"]
+[ext_resource type="PackedScene" uid="uid://tubjd68ngeq4" path="res://scenes/ui/weapons_ui.tscn" id="4_yhgwa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5arm"]
 albedo_color = Color(0.334122, 0.334122, 0.334122, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_4arys"]
 resource_local_to_scene = true
-size = Vector2(0.4, 0.2)
+size = Vector2(0.2, 0.4)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wosnj"]
 viewport_path = NodePath("Computer/SubViewport")
@@ -108,6 +109,12 @@ albedo_color = Color(0.113665, 0.113665, 0.113665, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_fo32q"]
 size = Vector3(0.45, 0.35, 0.45)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_jsssl"]
+viewport_path = NodePath("Weapons/SubViewport")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l2c2i"]
+size = Vector3(0.15, 0.3, 0.25)
+
 [node name="Computer" type="Area3D" unique_id=1194921621]
 collision_layer = 8
 collision_mask = 0
@@ -165,44 +172,37 @@ size = Vector3(3, 3, 3)
 material = SubResource("StandardMaterial3D_a8auw")
 
 [node name="ComputerCamera" type="Camera3D" parent="." unique_id=624025822]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.49785233)
+transform = Transform3D(0.9678886, 0, -0.25137937, 0, 1, 0, 0.25137937, 0, 0.9678886, 0, 0, 0.5036982)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1483478989]
 shape = SubResource("BoxShape3D_fo32q")
 
-[node name="Computer2" type="Node3D" parent="." unique_id=1089446097]
+[node name="Weapons" type="Node3D" parent="." unique_id=2128283997]
 script = ExtResource("2_m0ytd")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Computer2" unique_id=1344702385]
+[node name="SubViewport" type="SubViewport" parent="Weapons" unique_id=2145847810]
+own_world_3d = true
+physics_object_picking = true
+size = Vector2i(200, 400)
+render_target_update_mode = 4
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Computer2/CSGCombiner3D" unique_id=1750396322]
-size = Vector3(0.45, 0.35, 0.4)
-material = SubResource("StandardMaterial3D_i5arm")
+[node name="WeaponsUi" parent="Weapons/SubViewport" unique_id=1362444697 instance=ExtResource("4_yhgwa")]
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Computer2/CSGCombiner3D" unique_id=940617029]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0611729)
-operation = 2
-size = Vector3(0.4, 0.3, 0.3)
+[node name="Screen" type="Sprite3D" parent="Weapons" unique_id=381960224]
+transform = Transform3D(0.8914193, 0, -0.45317948, 0, 1, 0, 0.45317948, 0, 0.8914193, 0.31541157, 0, 0.25162825)
+pixel_size = 0.001
+texture = SubResource("ViewportTexture_jsssl")
 
-[node name="Quad" type="MeshInstance3D" parent="Computer2" unique_id=1136395547]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.213765)
+[node name="Area3D" type="Area3D" parent="Weapons/Screen" unique_id=1287386275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.313226e-10, 0, 0.00086417235)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Weapons/Screen/Area3D" unique_id=2006345968]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10521121)
+shape = SubResource("BoxShape3D_l2c2i")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="Quad" type="MeshInstance3D" parent="Weapons" unique_id=895881456]
+transform = Transform3D(0.8914193, 0, -0.45317945, 0, 1, 0, 0.45317945, 0, 0.8914193, 0.31222162, 0, 0.25000653)
 visible = false
 mesh = SubResource("QuadMesh_4arys")
 skeleton = NodePath("../..")
-
-[node name="SubViewport" type="SubViewport" parent="Computer2" unique_id=767093364]
-own_world_3d = true
-physics_object_picking = true
-size = Vector2i(1000, 750)
-render_target_update_mode = 4
-
-[node name="ShipModel" parent="Computer2/SubViewport" unique_id=154166379 instance=ExtResource("3_yw5oo")]
-
-[node name="Screen" type="MeshInstance3D" parent="Computer2" unique_id=1383805580]
-transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0, 0, 0.213525)
-mesh = SubResource("ArrayMesh_a8auw")
-
-[node name="Area3D" type="Area3D" parent="Computer2/Screen" unique_id=94261804]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Computer2/Screen/Area3D" unique_id=1579971153]
-shape = SubResource("ConcavePolygonShape3D_ifh66")

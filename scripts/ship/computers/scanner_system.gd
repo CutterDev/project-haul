@@ -14,6 +14,10 @@ signal room_targeted(target: Area3D)
 @onready var ship_pos: Node3D = $Computer/SubViewport/ShipModel/ShipPosition
 @onready var scanner_world: Node3D = $Computer/SubViewport/ShipModel
 @onready var computer: ComputerScreen = $Computer
+@onready var computer_weapons_selection = $Weapons/SubViewport/WeaponsUi
+
+# this is the actual weapons system that tracks power etc
+var weapons_system: WeaponSystem
 
 var packed_scannedroom: PackedScene = preload("res://scenes/ships/Models/scanned_room.tscn")
 var ship_model: Node3D
@@ -34,6 +38,10 @@ func _ready() -> void:
 	ship_model.rotation =  ship_target.rotation
 	ship_model.ready.connect(ship_ready)
 	scanner_world.add_child(ship_model)
+
+func initialize_system(system: WeaponSystem):
+	print("Weapons amount: ", system.weapons.size())
+	computer_weapons_selection.initialize_selection(system.weapons)
 
 func ship_ready() -> void:
 	for room in ship_target.rooms:

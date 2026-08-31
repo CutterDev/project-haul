@@ -5,7 +5,8 @@ class_name ShipSystem
 
 @export var start_power: int = 6
 
-@onready var power_computer: PowerComputer= $"../PowerSystemComputer/Computer/SubViewport/Control"
+@onready var power_computer: PowerSystemComputer = $"../Computers/PowerSystemComputer/Computer/SubViewport/Control"
+@onready var computers: Node3D = $"../Computers"
 
 var weapon_node_name: String = "WeaponSystem"
 var weapon_system: WeaponSystem
@@ -29,12 +30,23 @@ func get_systems() -> void:
 	if has_node(shield_node_name):
 		shield_system = get_node(shield_node_name)
 		power_computer.add_system(shield_system)
+		
+		if computers.has_node(shield_node_name):
+			var computer_shield = computers.get_node("%s/Computer/SubViewport/Control" % shield_node_name)
+			computer_shield.initialize_system(shield_system)
 	if has_node(oxygen_node_name):
 		oxygen_system = get_node(oxygen_node_name)
 		power_computer.add_system(oxygen_system)
+		if computers.has_node(oxygen_node_name):
+			var computer_oxygen = computers.get_node("%s/Computer/SubViewport/Control" % oxygen_node_name)
+			computer_oxygen.initialize_system(oxygen_system)
+
 	if has_node(weapon_node_name):
 		weapon_system = get_node(weapon_node_name)
 		power_computer.add_system(weapon_system)
+		if computers.has_node(weapon_node_name):
+			var computer_weapons = computers.get_node(weapon_node_name)
+			computer_weapons.initialize_system(weapon_system)
 	if has_node(engine_node_name):
 		engine_system = get_node(engine_node_name)
 		power_computer.add_system(engine_system)

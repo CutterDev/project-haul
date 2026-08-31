@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dtchkiy8u1roc"]
 
-[ext_resource type="Script" uid="uid://blv6qf550eu2b" path="res://scripts/ship/ship-system.gd" id="1_iyjb8"]
+[ext_resource type="Script" uid="uid://blv6qf550eu2b" path="res://scripts/ship/ship.gd" id="1_iyjb8"]
 [ext_resource type="Script" uid="uid://dn6a4u18q4i6h" path="res://scripts/ship/ship_room.gd" id="2_k8gom"]
 [ext_resource type="PackedScene" uid="uid://qbjkhjafft0w" path="res://scenes/ships/Models/prototype_ship.tscn" id="4_k8gom"]
 

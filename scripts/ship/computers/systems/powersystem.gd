@@ -1,7 +1,10 @@
 extends Control
-class_name ComputerPowerSystem
-signal attempted_power_increment(sender: ComputerPowerSystem)
-signal power_decremented(sender: ComputerPowerSystem, power_node)
+## Just handles 1 Power system on the computer's UI
+class_name PowerSystem
+signal attempted_power_increment(sender: PowerSystem)
+signal attempted_power_decrement(sender: PowerSystem, power_node)
+signal power_decremented()
+signal power_incremented()
 
 @onready var system_label: Label =  $Vbox/Margin/SystemName
 @onready var increment_node: Button = $Vbox/Increase
@@ -29,7 +32,8 @@ func _on_decrement_pressed():
 		total_power -= 1
 		var power_node = power_nodes.pop_back()
 		
-		power_decremented.emit(self,power_node)
+		attempted_power_decrement.emit(self,power_node)
+		power_decremented.emit()
 
 
 func _on_increment_pressed():
@@ -39,3 +43,4 @@ func add_power(power_node: Control):
 	total_power += 1
 	power_node.reparent(power_nodes_container)
 	power_nodes.push_back(power_node)
+	power_incremented.emit()
