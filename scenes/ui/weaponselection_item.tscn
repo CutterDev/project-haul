@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://e4dxxio0qa4h"]
 
-[ext_resource type="Script" uid="uid://cx2hrbqx8stal" path="res://scripts/UI/weaponselection_item.gd" id="1_i70wa"]
+[ext_resource type="Script" uid="uid://cx2hrbqx8stal" path="res://scripts/UI/weaponselection_item.gd" id="1_lm0is"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jsssl"]
 
 [node name="Weapon" type="MarginContainer" unique_id=367482487]
+modulate = Color(0.32941177, 0.6392157, 0.9098039, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,21 +13,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_right = 5
-script = ExtResource("1_i70wa")
+script = ExtResource("1_lm0is")
 
 [node name="Panel" type="Panel" parent="." unique_id=1174562882]
 layout_mode = 2
-
-[node name="Button" type="Button" parent="Panel" unique_id=5811548]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -50.0
-offset_bottom = 50.0
-grow_horizontal = 0
-text = "+"
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1553696371]
 layout_mode = 2
@@ -57,10 +47,12 @@ text = "Offline"
 label_settings = SubResource("LabelSettings_jsssl")
 
 [node name="Online" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1749651036]
+visible = false
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Online" unique_id=2142346533]
+[node name="Status" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Online" unique_id=2142346533]
 layout_mode = 2
+text = "Online"
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/VBoxContainer/Online" unique_id=226545825]
 custom_minimum_size = Vector2(0, 20)
@@ -69,3 +61,13 @@ show_percentage = false
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=155877265]
 layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2" unique_id=5811548]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "+"
+
+[connection signal="gui_input" from="." to="." method="_gui_input"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Button" to="." method="_on_button_pressed"]

@@ -17,6 +17,7 @@ var last_event_time: float = -1.0
 var debug_cube: MeshInstance3D
 var mouse_target: Area3D = null
 
+var debug_box: ColorRect = null
 func _ready():
 	node_area.mouse_entered.connect(_mouse_entered_area)
 	node_area.mouse_exited.connect(_mouse_exited_area)
@@ -24,7 +25,7 @@ func _ready():
 	
 	target_camera = node_viewport.get_camera_3d()
 	_setup_debug_cube()
-
+	setup_debug_box()
 func _setup_debug_cube():
 	debug_cube = MeshInstance3D.new()
 	var box_mesh = BoxMesh.new()
@@ -41,6 +42,11 @@ func _setup_debug_cube():
 		target_camera.get_parent().add_child(debug_cube)
 	else:
 		call_deferred("_attach_debug_cube")
+
+func setup_debug_box():
+	if has_node("SubViewport/Control/Debug"):
+		print("HAS BOX")
+		debug_box =  $"SubViewport/Control/Debug"
 
 func _attach_debug_cube():
 	target_camera = node_viewport.get_camera_3d()
@@ -70,6 +76,8 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
 	var now: float = Time.get_ticks_msec() / 1000.0
 	var quad_size: Vector2 = node_quad.mesh.size
+	
+
 	var local_pos: Vector3 = node_quad.global_transform.affine_inverse() * event_position
 
 	var event_pos_2d: Vector2
@@ -87,7 +95,8 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 		event_pos_2d = last_event_pos_2d
 
 	var viewport_event: InputEvent = event.duplicate()
-
+	if debug_box != null:
+		debug_box.position = event_pos_2d
 	if viewport_event is InputEventMouse:
 		viewport_event.position = event_pos_2d
 		viewport_event.global_position = event_pos_2d
@@ -103,7 +112,6 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
 	last_event_pos_2d = event_pos_2d
 	last_event_time = now
-
 	node_viewport.push_input(viewport_event)
 
 	if not target_camera:

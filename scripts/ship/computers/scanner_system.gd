@@ -14,11 +14,11 @@ signal room_targeted(target: Area3D)
 @onready var ship_pos: Node3D = $Computer/SubViewport/ShipModel/ShipPosition
 @onready var scanner_world: Node3D = $Computer/SubViewport/ShipModel
 @onready var computer: ComputerScreen = $Computer
-@onready var computer_weapons_selection = $Weapons/SubViewport/WeaponsUi
+@onready var computer_weapons_selection: WeaponsSelection = $Weapons/SubViewport/Control
 
 # this is the actual weapons system that tracks power etc
 var weapons_system: WeaponSystem
-
+var selected_weapon: Weapon
 var packed_scannedroom: PackedScene = preload("res://scenes/ships/Models/scanned_room.tscn")
 var ship_model: Node3D
 var start_position: Vector3
@@ -38,10 +38,11 @@ func _ready() -> void:
 	ship_model.rotation =  ship_target.rotation
 	ship_model.ready.connect(ship_ready)
 	scanner_world.add_child(ship_model)
-
+	computer_weapons_selection.weapon_selected.connect(weapon_selected)
 func initialize_system(system: WeaponSystem):
 	print("Weapons amount: ", system.weapons.size())
-	computer_weapons_selection.initialize_selection(system.weapons)
+	computer_weapons_selection.initialize_selection(system)
+	system.power_changed.connect(computer_weapons_selection.on_power_changed)
 
 func ship_ready() -> void:
 	for room in ship_target.rooms:
@@ -116,7 +117,12 @@ func _on_area_body_entered(body: Node3D) -> void:
 
 func _interaction(target: Area3D):
 	# can do something here 
-	print("Target: ", target)
+
 	for room in ship_target.rooms:
 		if room.name == target.name:
-			room_targeted.emit(room)
+			if selected_weapon != null:
+				print("Target: ", target)
+				selected_weapon.target = room
+
+func  weapon_selected(weapon: Weapon):
+	selected_weapon = weapon

@@ -52,14 +52,14 @@ mesh = SubResource("BoxMesh_jsssl")
 transform = Transform3D(-0.25737745, 0, -0.9663109, 0, 1, 0, 0.9663109, 0, -0.25737745, 2.2615972, 1.9, 0)
 
 [node name="WeaponSystem" parent="Ship/Computers" unique_id=1123764209 node_paths=PackedStringArray("ship_target") instance=ExtResource("6_o6xl0")]
-transform = Transform3D(0.73299086, 0, 0.6802385, 0, 1, 0, -0.6802385, 0, 0.73299086, -2.268402, 1.9, 0)
+transform = Transform3D(-0.0736582, 0, 0.99728346, 0, 1, 0, -0.99728346, 0, -0.0736582, 2.8576128, 1.9000007, -2.470207)
 ship_target = NodePath("../../../Ship2")
 
 [node name="OxygenSystem" parent="Ship/Computers" unique_id=1839320136 instance=ExtResource("9_muem4")]
 transform = Transform3D(-0.91306686, 0, -0.40780985, 0, 1, 0, 0.40780985, 0, -0.91306686, 1.589831, 1.9, 1.2929024)
 
 [node name="ShieldSystem" parent="Ship/Computers" unique_id=1194921621 instance=ExtResource("9_dp3eg")]
-transform = Transform3D(0.34494108, 0, -0.9386243, 0, 1, 0, 0.9386243, 0, 0.34494108, 2.478328, 1.9, -1.3603115)
+transform = Transform3D(0.34494108, 0, -0.9386243, 0, 1, 0, 0.9386243, 0, 0.34494108, 2.23659, 1.8999997, -2.0961266)
 
 [node name="Player" parent="Ship" unique_id=1350014039 instance=ExtResource("2_0wfyh")]
 

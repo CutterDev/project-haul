@@ -10,7 +10,7 @@ albedo_color = Color(0.334122, 0.334122, 0.334122, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_4arys"]
 resource_local_to_scene = true
-size = Vector2(0.2, 0.4)
+size = Vector2(0.4, 0.3)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_wosnj"]
 viewport_path = NodePath("Computer/SubViewport")
@@ -109,11 +109,52 @@ albedo_color = Color(0.113665, 0.113665, 0.113665, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_fo32q"]
 size = Vector3(0.45, 0.35, 0.45)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_jsssl"]
+[sub_resource type="QuadMesh" id="QuadMesh_yhgwa"]
+resource_local_to_scene = true
+size = Vector2(0.4, 0.3)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yhgwa"]
 viewport_path = NodePath("Weapons/SubViewport")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_l2c2i"]
-size = Vector3(0.15, 0.3, 0.25)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yhgwa"]
+resource_local_to_scene = true
+resource_name = "Material"
+cull_mode = 2
+albedo_color = Color(2.573, 4.779, 6.985, 1)
+albedo_texture = SubResource("ViewportTexture_yhgwa")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yhgwa"]
+resource_local_to_scene = true
+resource_name = "computer_screen_Cube"
+_surfaces = [{
+"aabb": AABB(-0.399709, -0.3, -0.00859782, 0.799418, 0.6, 0.0335679),
+"attribute_data": PackedByteArray("gJn//wiA/H+Amfx/CID//yez//8ns/x/38z//9/M/H+H5v7/h+b8f////v/+//x/"),
+"format": 34896613399,
+"index_count": 30,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAAAAIABAACAAUABgAEAAUABgAFAAcACAAGAAcACAAHAAkACgAIAAkACgAJAAsA"),
+"material": SubResource("StandardMaterial3D_yhgwa"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(2.00055, 2.00019, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("DM0AAHhVC/z///////834wzN//94VQv8//8AAP//N+O5mQAAAACu/rmZ//8AAK7+RWYAAAAArv5FZv//AACu/vIyAAB4VQv88jL//3hVC/wAAAAA//834wAA/////zfjFX5vJsFSCQlvpukBCYk+LVp/jiWNpaQAcVpa/6SAcNqPWRX+6YGP2T2t9fb1dsDS")
+}, {
+"aabb": AABB(-0.399709, -0.3, -0.00859782, 0.799418, 0.6, 0.053264),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/AAAAAAAAgD8AAAAAAACAPwAAAAAAAIA/"),
+"format": 34359742487,
+"index_count": 102,
+"index_data": PackedByteArray("AAARAAIAEgACABEAEgAEAAIAAAAMABEABAASAA0ADQASABEADQARAAwABAANAAsAAwAMAAAACwANABMAEwANAAwACwATAAoAAwAUAAwAEwAMABQAAQAUAAMACgATABUAFQATABQACgAVAAkAAQAWABQAFQAUABYABgAWAAEACQAVAA8ADwAVABYACQAPAAgABgAOABYADwAWAA4ABQAOAAYACAAPABAAEAAPAA4ACAAQAAcABQAXAA4AEAAOABcABwAXAAUABwAQABcA"),
+"lods": [0.0171389, PackedByteArray("AAAMAAIAAwAMAAAAAQAMAAMADQACAAwADQAEAAIAAQAOAAwADQAMAA4ABgAOAAEABAANAAsACwANAAoABQAOAAYACgANAAkACQANAA8ADwANAA4ACQAPAAgAEAAOAAUAEAAPAA4ACAAPABAABwAQAAUACAAQAAcA"), 0.0335255, PackedByteArray("AAABAAIAAwABAAAABAACAAEABQABAAYABwABAAUABwAIAAEACAAEAAEACQAEAAgACgAEAAkACwAEAAoA")],
+"material": SubResource("StandardMaterial3D_sfpdp"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("pmF2vpqZmT5ABis7f4WkPZqZmT7c3Qy8oqbMvpqZmT76jcw8f4WkvZqZmT7c3Qy8oqbMvpqZmb76jcw8oqbMPpqZmT76jcw8pmF2PpqZmT5ABis7oqbMPpqZmb76jcw8pmF2PpqZmb5ABis7f4WkPZqZmb7c3Qy8f4WkvZqZmb7c3Qy8pmF2vpqZmb5ABis7nj10vpqZmT4OUrg8nj10vpqZmb4OUrg8nj10PpqZmT4OUrg8nj10PpqZmb4OUrg8bd/KPpqZmb7n8zY9bd/KvpqZmT7n8zY9bd/KvpqZmb7n8zY9jRejvZqZmb4enTo8jRejvZqZmT4enTo8jRejPZqZmb4enTo8jRejPZqZmT4enTo8bd/KPpqZmT7n8zY9RzyO+f///z/Gwcf9////P+Eqss7///8/OD7H/f///z/hKkwx////Px3Vss7///8/t8OO+f///z8d1Uwx////P7fDcAb///8/xsE3Av///z84PjcC////P0c8cAb///8/Toaxvf///z9Ohk1C////P7B5sb3///8/sHlNQv///z+zo9dU////P0tcJ6v///8/S1zXVP///z8rglxA////PyuCor////8/031cQP///z/TfaK/////P7OjJ6v///8/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_u3ios")
 
 [node name="Computer" type="Area3D" unique_id=1194921621]
 collision_layer = 8
@@ -178,31 +219,27 @@ transform = Transform3D(0.9678886, 0, -0.25137937, 0, 1, 0, 0.25137937, 0, 0.967
 shape = SubResource("BoxShape3D_fo32q")
 
 [node name="Weapons" type="Node3D" parent="." unique_id=2128283997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011646844, 0, -0.033993125)
 script = ExtResource("2_m0ytd")
 
-[node name="SubViewport" type="SubViewport" parent="Weapons" unique_id=2145847810]
-own_world_3d = true
+[node name="Quad" type="MeshInstance3D" parent="Weapons" unique_id=895881456]
+transform = Transform3D(0.83423233, 0, -0.55141294, 0, 1, 0, 0.55141294, 0, 0.83423233, 0.39455768, 0, 0.3861405)
+visible = false
+mesh = SubResource("QuadMesh_yhgwa")
+skeleton = NodePath("../..")
+
+[node name="SubViewport" type="SubViewport" parent="Weapons" unique_id=1208683125]
 physics_object_picking = true
-size = Vector2i(200, 400)
+size = Vector2i(1000, 750)
 render_target_update_mode = 4
 
-[node name="WeaponsUi" parent="Weapons/SubViewport" unique_id=1362444697 instance=ExtResource("4_yhgwa")]
+[node name="Control" parent="Weapons/SubViewport" unique_id=1362444697 instance=ExtResource("4_yhgwa")]
 
-[node name="Screen" type="Sprite3D" parent="Weapons" unique_id=381960224]
-transform = Transform3D(0.8914193, 0, -0.45317948, 0, 1, 0, 0.45317948, 0, 0.8914193, 0.31541157, 0, 0.25162825)
-pixel_size = 0.001
-texture = SubResource("ViewportTexture_jsssl")
+[node name="Screen" type="MeshInstance3D" parent="Weapons" unique_id=77591643]
+transform = Transform3D(-0.41711625, 0, 0.27570647, 0, 0.5, 0, -0.27570647, 0, -0.41711625, 0.3946063, 0, 0.38617262)
+mesh = SubResource("ArrayMesh_yhgwa")
 
-[node name="Area3D" type="Area3D" parent="Weapons/Screen" unique_id=1287386275]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.313226e-10, 0, 0.00086417235)
+[node name="Area3D" type="Area3D" parent="Weapons/Screen" unique_id=212674694]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Weapons/Screen/Area3D" unique_id=2006345968]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.10521121)
-shape = SubResource("BoxShape3D_l2c2i")
-debug_color = Color(1, 1, 1, 0.41960785)
-
-[node name="Quad" type="MeshInstance3D" parent="Weapons" unique_id=895881456]
-transform = Transform3D(0.8914193, 0, -0.45317945, 0, 1, 0, 0.45317945, 0, 0.8914193, 0.31222162, 0, 0.25000653)
-visible = false
-mesh = SubResource("QuadMesh_4arys")
-skeleton = NodePath("../..")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Weapons/Screen/Area3D" unique_id=639232314]
+shape = SubResource("ConcavePolygonShape3D_ifh66")
